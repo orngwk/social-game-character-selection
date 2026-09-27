@@ -384,9 +384,21 @@ button {
 
 <section id="manual9" class="panel hidden">
   <div class="manual9-head"><h2>自分で選んで作成</h2><p>キャラクターを選択した順番で順位が決まります。</p></div>
+  <div class="setup-section manual9-title-section">
+    <h2 class="setup-title">タイトル</h2>
+    <div class="setup-help">結果画面で表示されるタイトルです。例：好き顔選抜</div>
+    <div class="title-options" id="manual9TitleOptions">
+      <button type="button" class="choice-button active" data-title="好き顔">好き顔</button>
+      <button type="button" class="choice-button" data-title="推し">推し</button>
+      <button type="button" class="choice-button" data-title="custom">自由記述</button>
+    </div>
+    <input id="manual9CustomTitle" class="custom-title" type="text" maxlength="30" placeholder="タイトルを入力">
+    <div class="top-error" id="manual9TitleError"></div>
+  </div>
   <div class="manual9-summary"><div class="manual9-count" id="manual9Count">選択済み</div><div class="manual9-selected" id="manual9Selected"></div></div>
-  <div class="manual9-actions"><button class="primary" id="manual9Finish" disabled>このメンバーで作成</button></div>
-  <div class="manual9-actions"><button class="secondary" id="manual9Top">トップ画面に戻る</button></div>
+  <div class="manual9-actions" id="manual9PreActions"><button class="primary" id="manual9Finish" disabled>このメンバーで作成</button></div>
+  <div class="manual9-actions" id="manual9PreTopAction"><button class="secondary" id="manual9Top">トップ画面に戻る</button></div>
+  <div class="manual9-result-actions hidden" id="manual9ResultActions"><button class="primary" id="manual9Again">もう一度遊ぶ</button><button class="secondary" id="manual9ResultTop">トップ画面に戻る</button></div>
   <div id="manual9Result" class="manual9-result hidden"></div>
   <div id="manual9Games"></div>
   </section>
@@ -993,9 +1005,21 @@ function showOnlyStage(stage){
   document.querySelector(stage)?.classList.remove("hidden");
 }
 
+function resolveManual9Title(){
+  const error=document.querySelector("#manual9TitleError");
+  if(selectedTitleMode==="custom"){
+    const value=document.querySelector("#manual9CustomTitle")?.value.trim()||"";
+    if(!value){if(error) error.textContent="タイトルを入力してください。";return false;}
+    selectedTitle=value.endsWith("選抜")?value:value+"選抜";
+  }else{
+    selectedTitle=selectedTitleMode+"選抜";
+  }
+  if(error) error.textContent="";
+  return true;
+}
+
 function startManual9(){
-  const error=document.querySelector("#topError");
-  if(!resolveSelectedTitle()) return;
+  if(!resolveManual9Title()) return;
   const selectedGames=new Set(getSelectedGames());
   if(!selectedGames.size){error.textContent="ゲームを1つ以上選択してください。";return;}
   clearProgress();
@@ -1006,9 +1030,16 @@ function startManual9(){
   ranking=[]; finalStats=new Map();
   currentStage="manual9";
   showOnlyStage("#manual9");
-  renderManual9();
+  document.querySelectorAll("#manual9TitleOptions .choice-button").forEach(b=>b.classList.toggle("active",b.dataset.title===selectedTitleMode));
+  const manualCustom=document.querySelector("#manual9CustomTitle");
+  if(manualCustom){ manualCustom.value=document.querySelector("#customTitle")?.value||""; manualCustom.classList.toggle("show",selectedTitleMode==="custom"); }
+  document.querySelector("#manual9TitleError")?.replaceChildren();
+  document.querySelector("#manual9ResultActions")?.classList.add("hidden");
+  document.querySelector("#manual9PreActions")?.classList.remove("hidden");
+  document.querySelector("#manual9PreTopAction")?.classList.remove("hidden");
   const manualResult=document.querySelector("#manual9Result");
   manualResult?.classList.add("hidden");
+  renderManual9();
   saveProgress();
 }
 
@@ -1099,6 +1130,9 @@ function finishManual9(){
   finalStats=new Map(ranking.map((c,i)=>[c.id,{score:9-i,wins:9-i,both:0,none:0,comparisons:0}]));
   currentStage="manual9";
   renderManual9Result();
+  document.querySelector("#manual9PreActions")?.classList.add("hidden");
+  document.querySelector("#manual9PreTopAction")?.classList.add("hidden");
+  document.querySelector("#manual9ResultActions")?.classList.remove("hidden");
   saveProgress();
   document.querySelector("#manual9Result")?.scrollIntoView({behavior:"smooth",block:"start"});
 }
@@ -1175,27 +1209,42 @@ setMode("simple");
 const __restored = hasProgress() ? restoreProgress() : false;
 if(!__restored){ document.querySelector("#top").classList.remove("hidden"); }
 document.querySelectorAll("#titleOptions .choice-button").forEach(b=>b.onclick=()=>applyTitle(b.dataset.title));
+document.querySelectorAll("#manual9TitleOptions .choice-button").forEach(b=>b.onclick=()=>{
+  selectedTitleMode=b.dataset.title;
+  document.querySelectorAll("#manual9TitleOptions .choice-button").forEach(x=>x.classList.toggle("active",x.dataset.title===selectedTitleMode));
+  document.querySelector("#manual9CustomTitle")?.classList.toggle("show",selectedTitleMode==="custom");
+  document.querySelector("#manual9TitleError")?.replaceChildren();
+});
+document.querySelector("#manual9CustomTitle")?.addEventListener("input",()=>{document.querySelector("#manual9TitleError")?.replaceChildren();});
 document.querySelectorAll("#modeOptions .choice-button").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 document.querySelector("#startGame").onclick=startGame;
 document.querySelector("#manual9Start").onclick=startManual9;
 document.querySelector("#manual9Finish").onclick=finishManual9;
-document.querySelector("#manual9Top").onclick=()=>{ clearProgress(); manual9Selected=[]; ranking=[]; finalStats=new Map(); currentStage="top"; showOnlyStage("#top"); };
+document.querySelector("#manual9Top").onclick=()=>{
+  clearProgress(); manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map(); currentStage="top";
+  document.querySelector("#manual9Result")?.classList.add("hidden");
+  document.querySelector("#manual9ResultActions")?.classList.add("hidden");
+  document.querySelector("#manual9PreActions")?.classList.remove("hidden");
+  document.querySelector("#manual9PreTopAction")?.classList.remove("hidden");
+  showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
+};
+document.querySelector("#manual9Again").onclick=()=>{
+  clearProgress(); manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map(); currentStage="top";
+  document.querySelector("#manual9Result")?.classList.add("hidden");
+  document.querySelector("#manual9ResultActions")?.classList.add("hidden");
+  document.querySelector("#manual9PreActions")?.classList.remove("hidden");
+  document.querySelector("#manual9PreTopAction")?.classList.remove("hidden");
+  showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
+};
+document.querySelector("#manual9ResultTop").onclick=()=>{
+  clearProgress(); manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map(); currentStage="top";
+  showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
+};
 document.querySelector("#saveButton").onclick=manualSave;
 document.querySelector("#restartButton").onclick=()=>{
-  if(!confirm("保存した途中経過を消して、最初から始めますか？")) return;
-  if(currentStage==="manual9"){
-    clearProgress();
-    manual9Selected=[];
-    ranking=[];
-    allSelected=new Set();
-    finalStats=new Map();
-    document.querySelector("#manual9Result")?.classList.add("hidden");
-    renderManual9();
-    saveProgress();
-  }else{
-    clearProgress();
-    location.reload();
-  }
+  if(!confirm("保存した途中経過を消して、トップ画面に戻りますか？")) return;
+  clearProgress(); manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map();
+  currentStage="top"; showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
 };
 document.querySelector("#customTitle").addEventListener("input",()=>{document.querySelector("#topError").textContent="";});
 document.querySelector("#prev1").onclick=()=>{if(page1>0){page1--;currentStage="round1";renderPage(1);saveProgress()}};
