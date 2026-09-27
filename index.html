@@ -1178,7 +1178,7 @@ function showResult(){
     return 0;
   });
   if(!ranking.length){
-    box.innerHTML=`<div class="result-head"><div class="eyebrow">RESULT</div><h2>${esc(selectedTitle)}</h2><p>今回は選択されたキャラがいませんでした。</p></div><div class="result-actions"><button class="primary" onclick="clearProgress(); location.reload()">もう一度遊ぶ</button><button class="secondary" onclick="startManual9()">自分で選んで作成</button></div>`;
+    box.innerHTML=`<div class="result-head"><div class="eyebrow">RESULT</div><h2>${esc(selectedTitle)}</h2><p>今回は選択されたキャラがいませんでした。</p></div><div class="result-actions"><button class="primary" onclick="clearProgress(); location.reload()">もう一度遊ぶ</button><button class="secondary" data-action="start-manual9">自分で選んで作成</button></div>`;
     return;
   }
 
@@ -1199,7 +1199,7 @@ function showResult(){
     return `<div class="other-card">${hasFinalRank?rankBadge(rank):""}${img(c)}<div class="info"><strong>${esc(c.name)}</strong><div class="game">${esc(c.game)}</div></div></div>`;
   }).join("");
 
-  box.innerHTML=`<div class="result-head"><div class="eyebrow">RESULT</div><h2>${esc(selectedTitle)}</h2></div><div class="top9-grid result-top9">${top9Grid}</div><div class="ranking-title"><h2>${esc(selectedTitle)}ランキング</h2></div><div class="ranking-names">${rankingNames}</div>${others.length?`<div class="other-title"><h2>その他に選んだキャラ</h2><p class="other-note">最終比較まで進んだキャラは順位を表示しています。</p></div><div class="other">${otherCards}</div>`:""}<div class="result-actions"><button class="primary" onclick="clearProgress(); location.reload()">もう一度遊ぶ</button><button class="secondary" onclick="startManual9()">自分で選んで作成</button></div>`;
+  box.innerHTML=`<div class="result-head"><div class="eyebrow">RESULT</div><h2>${esc(selectedTitle)}</h2></div><div class="top9-grid result-top9">${top9Grid}</div><div class="ranking-title"><h2>${esc(selectedTitle)}ランキング</h2></div><div class="ranking-names">${rankingNames}</div>${others.length?`<div class="other-title"><h2>その他に選んだキャラ</h2><p class="other-note">最終比較まで進んだキャラは順位を表示しています。</p></div><div class="other">${otherCards}</div>`:""}<div class="result-actions"><button class="primary" onclick="clearProgress(); location.reload()">もう一度遊ぶ</button><button class="secondary" data-action="start-manual9">自分で選んで作成</button></div>`;
   saveProgress();
 }
 
@@ -1236,6 +1236,12 @@ document.querySelector("#manual9Again").onclick=()=>{
   document.querySelector("#manual9PreTopAction")?.classList.remove("hidden");
   showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
 };
+document.querySelector("#result").addEventListener("click",(e)=>{
+  const btn=e.target.closest('button[data-action="start-manual9"]');
+  if(!btn) return;
+  e.preventDefault();
+  startManual9();
+});
 document.querySelector("#manual9ResultTop").onclick=()=>{
   clearProgress(); manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map(); currentStage="top";
   showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
