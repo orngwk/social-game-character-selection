@@ -308,10 +308,10 @@ button {
 .setup-help{font-size:13px;font-weight:400;color:#666;line-height:1.6;margin-top:6px}
 .game-option{display:flex;align-items:center;gap:7px;background:#f6f6f7;border-radius:10px;padding:9px 11px;font-size:14px;font-weight:700}
 .game-option input{width:18px;height:18px;accent-color:#222}
-.about{margin-top:22px;border-top:1px solid #eee;padding-top:4px}
+.about{margin-top:22px;border-top:1px solid #eee;padding-top:22px}
 .about summary{cursor:pointer;font-weight:800;padding:12px 2px}
 .about-content{font-size:13px;line-height:1.9;color:#555;padding:4px 4px 10px;white-space:pre-line}
-.top-error{text-align:center;color:#b00020;font-size:13px;margin-top:10px;min-height:1.4em}.manual9-top-section{margin-top:22px}.manual9-top-rule{border-top:1px solid #eee;padding-top:4px}.manual9-top-action{display:flex;justify-content:center;margin-top:14px}.manual9-top-action button{min-width:240px}
+.top-error{text-align:center;color:#b00020;font-size:13px;margin-top:10px;min-height:1.4em}.manual9-top-section{margin-top:22px}.manual9-top-rule{margin-top:22px;border-top:1px solid #eee;padding-top:22px}.manual9-top-action{display:flex;justify-content:center;margin-top:14px}.manual9-top-action button{min-width:240px}
 
 #pageNote2{font-weight:800}
 
@@ -331,6 +331,13 @@ button {
 .podium-card,.top9-card{position:relative}
 .podium-card .face-image-wrap,.top9-card .face-image-wrap{position:relative}
 @media(max-width:650px){.rank-badge{left:6px;top:6px;min-width:30px;height:30px;font-size:12px;padding:0 6px}}
+
+.sort-top-section{max-width:760px;margin:0 auto}.sort-top-section .setup-help{max-width:760px}
+#sortResultBox .sort-ranking{max-width:600px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+#sortResultBox .sort-ranking-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #eee;font-size:15px;font-weight:700}
+#sortResultBox .sort-ranking-row:last-child{border-bottom:0}
+#sortResultBox .sort-rank{width:48px;flex:0 0 48px;text-align:right;color:#777;font-size:13px}
+@media(max-width:650px){#sortResultBox .sort-ranking-row{font-size:14px;padding:9px 12px}}
 </style>
 </head>
 <body>
@@ -373,6 +380,14 @@ button {
     <div class="manual9-top-action"><button type="button" class="secondary" id="manual9Start">自分で選んで作成する</button></div>
   </div>
 
+  <div class="sort-top-section">
+    <div class="manual9-top-rule"></div>
+    <div class="manual9-top-spacer"></div>
+    <h2 class="setup-title">ソート</h2>
+    <div class="setup-help">結果は全員名前のみ、１０位以降も表示されます。</div>
+    <div class="manual9-top-action"><button type="button" class="secondary" id="sortStart">ソートを作成する</button></div>
+  </div>
+
   <details class="about">
     <summary>当サイトについて</summary>
     <div class="about-content">当サイトは、ファン制作の非公式サイトです。ファンによる個人的な趣味・娯楽を目的としたものであり、各作品の公式運営会社・制作会社・出版社・権利者等とは一切関係ありません。
@@ -380,6 +395,39 @@ button {
 また、当サイトで使用している画像はHTML内に埋め込まれており、ダウンロード機能はなく、AIによる画像生成・加工等はおこなっていません。
 結果をスクリーンショット等で共有する場合は、各画像・キャラクター・作品の権利関係をご確認のうえ、利用者ご自身の判断でお願いいたします。</div>
   </details>
+</section>
+
+<section id="sortSetup" class="panel hidden">
+  <div class="manual9-head"><h2>ソート</h2></div>
+  <div class="setup-section">
+    <h2 class="setup-title">タイトル</h2>
+    <div class="setup-help">結果画面で表示されるタイトルです。例：好き顔選抜</div>
+    <div class="title-options" id="sortTitleOptions">
+      <button type="button" class="choice-button active" data-title="好き顔">好き顔</button>
+      <button type="button" class="choice-button" data-title="推し">推し</button>
+      <button type="button" class="choice-button" data-title="custom">自由記述</button>
+    </div>
+    <input id="sortCustomTitle" class="custom-title" type="text" maxlength="30" placeholder="タイトルを入力">
+    <div class="top-error" id="sortTitleError"></div>
+  </div>
+  <div class="setup-section">
+    <h2 class="setup-title">ゲーム選択</h2>
+    <div class="setup-help">チェックをつけたゲームの全キャラクターが対象です。</div>
+    <div class="game-options" id="sortGameOptions"></div>
+  </div>
+  <div class="top-start"><button type="button" class="primary" id="sortBegin">スタート</button></div>
+  <div class="manual9-actions"><button class="secondary" id="sortTop">トップ画面に戻る</button></div>
+</section>
+
+<section id="sortFinal" class="panel hidden">
+  <div class="progress"><b id="sortFinalCount">ソート</b></div>
+  <div id="sortVs" class="vs"></div>
+  <div class="nav"><button class="secondary" id="prevSort">← 前へ</button></div>
+</section>
+
+<section id="sortResult" class="panel hidden">
+  <div id="sortResultBox" class="manual9-result"></div>
+  <div class="manual9-result-actions" id="sortResultActions"><button class="primary" id="sortAgain">もう一度ソート</button><button class="secondary" id="sortResultTop">トップ画面に戻る</button></div>
 </section>
 
 <section id="manual9" class="panel hidden">
@@ -878,6 +926,16 @@ function getRank(index){
 
 let selectedTitleMode = "好き顔";
 let selectedTitle = "好き顔選抜";
+
+// ソート専用の状態
+let sortTitleMode = "好き顔";
+let sortTitle = "好き顔選抜";
+let sortChars = [];
+let sortPairs = [];
+let sortPairIndex = 0;
+let sortHistory = [];
+let sortStats = new Map();
+
 const gameNames = [...new Set(chars.map(c=>c.game))];
 
 function renderGameOptions(){
@@ -1001,7 +1059,7 @@ function resolveSelectedTitle(){
 }
 
 function showOnlyStage(stage){
-  ["#top","#manual9","#round1","#round2","#final","#result"].forEach(sel=>document.querySelector(sel)?.classList.add("hidden"));
+  ["#top","#sortSetup","#sortFinal","#sortResult","#manual9","#round1","#round2","#final","#result"].forEach(sel=>document.querySelector(sel)?.classList.add("hidden"));
   document.querySelector(stage)?.classList.remove("hidden");
 }
 
@@ -1137,6 +1195,99 @@ function finishManual9(){
   document.querySelector("#manual9Result")?.scrollIntoView({behavior:"smooth",block:"start"});
 }
 
+function renderSortGameOptions(){
+  const box=document.querySelector("#sortGameOptions");
+  if(!box) return;
+  box.innerHTML=gameNames.map((g,i)=>{
+    const count=allChars.filter(c=>c.game===g).length;
+    return `<label class="game-option"><input type="checkbox" value="${esc(g)}" checked> <span>${esc(g)}(${count}人)</span></label>`;
+  }).join("");
+}
+
+function resolveSortTitle(){
+  if(sortTitleMode==="custom"){
+    const v=(document.querySelector("#sortCustomTitle")?.value||"").trim();
+    if(!v){ document.querySelector("#sortTitleError").textContent="タイトルを入力してください。"; return false; }
+    sortTitle=v;
+  }else{
+    sortTitle=sortTitleMode+"選抜";
+  }
+  document.querySelector("#sortTitleError").textContent="";
+  return true;
+}
+
+function startSort(){
+  if(!resolveSortTitle()) return;
+  const selectedGames=[...document.querySelectorAll("#sortGameOptions input:checked")].map(x=>x.value);
+  if(!selectedGames.length){document.querySelector("#sortTitleError").textContent="ゲームを1つ以上選択してください。";return;}
+  sortChars=allChars.filter(c=>selectedGames.includes(c.game));
+  if(sortChars.length<2){document.querySelector("#sortTitleError").textContent="2人以上のキャラクターを選択してください。";return;}
+  sortPairs=buildAllPairs(sortChars);
+  sortPairIndex=0;
+  sortHistory=[];
+  sortStats=new Map(sortChars.map(c=>[c.id,{score:0,wins:0,both:0,none:0,comparisons:0}]));
+  currentStage="sortFinal";
+  showOnlyStage("#sortFinal");
+  showSortPair();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showSortPair(){
+  if(sortPairIndex>=sortPairs.length){finishSort();return;}
+  const [a,b]=sortPairs[sortPairIndex];
+  document.querySelector("#sortFinalCount").textContent=`ソート　比較 ${sortPairIndex+1} / ${sortPairs.length}`;
+  const vs=document.querySelector("#sortVs");
+  vs.innerHTML=`<div class="fight" id="sortLeft">${img(a)}</div><div class="fight" id="sortRight">${img(b)}</div><div style="grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px"><button class="secondary" id="sortBothBtn">両方</button><button class="secondary" id="sortNoneBtn">選ばない</button></div>`;
+  const prevSortBtn = document.querySelector("#prevSort");
+  if(prevSortBtn) prevSortBtn.disabled = sortHistory.length === 0;
+  document.querySelector("#sortLeft").onclick=()=>answerSort("left");
+  document.querySelector("#sortRight").onclick=()=>answerSort("right");
+  document.querySelector("#sortBothBtn").onclick=()=>answerSort("both");
+  document.querySelector("#sortNoneBtn").onclick=()=>answerSort("none");
+}
+
+function backFromSort(){
+  if(!sortHistory.length) return;
+  const prev = sortHistory[sortHistory.length - 1];
+  sortHistory.pop();
+  sortPairIndex = prev.sortPairIndex;
+  sortStats = new Map([...prev.stats.entries()].map(([id, st]) => [id, {...st}]));
+  currentStage="sortFinal";
+  showOnlyStage("#sortFinal");
+  showSortPair();
+}
+
+function answerSort(choice){
+  if(sortPairIndex>=sortPairs.length)return;
+  const [a,b]=sortPairs[sortPairIndex];
+  sortHistory.push({sortPairIndex,stats:new Map([...sortStats.entries()].map(([id,st])=>[id,{...st}]))});
+  const sa=sortStats.get(a.id), sb=sortStats.get(b.id);
+  sa.comparisons++; sb.comparisons++;
+  if(choice==="left"){sa.score+=2;sa.wins++;sb.score-=1;}
+  else if(choice==="right"){sb.score+=2;sb.wins++;sa.score-=1;}
+  else if(choice==="both"){sa.score+=0.5;sb.score+=0.5;sa.both++;sb.both++;}
+  else{sa.score-=0.5;sb.score-=0.5;sa.none++;sb.none++;}
+  sortPairIndex++;
+  showSortPair();
+}
+
+function finishSort(){
+  const sorted=sortChars.slice().sort((a,b)=>{
+    const sa=sortStats.get(a.id),sb=sortStats.get(b.id);
+    return (sb.score-sa.score)||(sb.wins-sa.wins)||a.name.localeCompare(b.name,"ja");
+  });
+  ranking=sorted;
+  currentStage="sortResult";
+  renderSortResult();
+  showOnlyStage("#sortResult");
+}
+
+function renderSortResult(){
+  const box=document.querySelector("#sortResultBox");
+  const rows=ranking.map((c,i)=>`<div class="sort-ranking-row"><span class="sort-rank">${i+1}位</span><span>${esc(c.name)}</span></div>`).join("");
+  box.innerHTML=`<div class="result-head"><div class="eyebrow">SORT RESULT</div><h2>${esc(sortTitle)}</h2><p>全員を1対1で比較したランキングです。</p></div><div class="ranking-title"><h2>${esc(sortTitle)}ランキング</h2></div><div class="sort-ranking">${rows}</div>`;
+}
+
 function startGame(){
   const error=document.querySelector("#topError");
   if(!resolveSelectedTitle()) return;
@@ -1218,6 +1369,14 @@ document.querySelectorAll("#manual9TitleOptions .choice-button").forEach(b=>b.on
 document.querySelector("#manual9CustomTitle")?.addEventListener("input",()=>{document.querySelector("#manual9TitleError")?.replaceChildren();});
 document.querySelectorAll("#modeOptions .choice-button").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 document.querySelector("#startGame").onclick=startGame;
+document.querySelector("#sortStart").onclick=()=>{showOnlyStage("#sortSetup"); renderSortGameOptions(); window.scrollTo({top:0,behavior:"smooth"});};
+document.querySelectorAll("#sortTitleOptions .choice-button").forEach(b=>b.onclick=()=>{sortTitleMode=b.dataset.title;document.querySelectorAll("#sortTitleOptions .choice-button").forEach(x=>x.classList.toggle("active",x.dataset.title===sortTitleMode));document.querySelector("#sortCustomTitle")?.classList.toggle("show",sortTitleMode==="custom");document.querySelector("#sortTitleError")?.replaceChildren();});
+document.querySelector("#sortCustomTitle")?.addEventListener("input",()=>{document.querySelector("#sortTitleError")?.replaceChildren();});
+document.querySelector("#sortBegin").onclick=startSort;
+document.querySelector("#prevSort").onclick=backFromSort;
+document.querySelector("#sortTop").onclick=()=>{currentStage="top";showOnlyStage("#top");window.scrollTo({top:0,behavior:"smooth"});};
+document.querySelector("#sortAgain").onclick=()=>{currentStage="sortSetup";showOnlyStage("#sortSetup");renderSortGameOptions();window.scrollTo({top:0,behavior:"smooth"});};
+document.querySelector("#sortResultTop").onclick=()=>{currentStage="top";showOnlyStage("#top");window.scrollTo({top:0,behavior:"smooth"});};
 document.querySelector("#manual9Start").onclick=startManual9;
 document.querySelector("#manual9Finish").onclick=finishManual9;
 document.querySelector("#manual9Top").onclick=()=>{
@@ -1248,6 +1407,15 @@ document.querySelector("#manual9ResultTop").onclick=()=>{
 };
 document.querySelector("#saveButton").onclick=manualSave;
 document.querySelector("#restartButton").onclick=()=>{
+
+  if(currentStage==="sortFinal" || currentStage==="sortResult") {
+    currentStage="sortSetup";
+    sortPairIndex=0; sortPairs=[]; sortChars=[]; sortStats=new Map();
+    showOnlyStage("#sortSetup");
+    renderSortGameOptions();
+    window.scrollTo({top:0,behavior:"smooth"});
+    return;
+  }
 
   // 「自分で選んで作成」の途中なら、選択だけをリセットして
   // 自分で選んで作成の画面に戻る。
