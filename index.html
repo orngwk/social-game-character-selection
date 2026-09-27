@@ -1242,9 +1242,49 @@ document.querySelector("#manual9ResultTop").onclick=()=>{
 };
 document.querySelector("#saveButton").onclick=manualSave;
 document.querySelector("#restartButton").onclick=()=>{
-  if(!confirm("保存した途中経過を消して、トップ画面に戻りますか？")) return;
-  clearProgress(); manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map();
-  currentStage="top"; showOnlyStage("#top"); window.scrollTo({top:0,behavior:"smooth"});
+  if(!confirm("保存した途中経過を消して、最初からやり直しますか？")) return;
+
+  // 「自分で選んで作成」の途中なら、選択だけをリセットして
+  // 自分で選んで作成の画面に戻る。
+  if(currentStage==="manual9"){
+    clearProgress();
+    manual9Selected=[];
+    ranking=[];
+    allSelected=new Set();
+    finalStats=new Map();
+    document.querySelector("#manual9Result")?.classList.add("hidden");
+    document.querySelector("#manual9ResultActions")?.classList.add("hidden");
+    document.querySelector("#manual9PreActions")?.classList.remove("hidden");
+    document.querySelector("#manual9PreTopAction")?.classList.remove("hidden");
+    currentStage="manual9";
+    renderManual9();
+    window.scrollTo({top:0,behavior:"smooth"});
+    saveProgress();
+    return;
+  }
+
+  // 通常の「ソシャゲキャラ選抜」では、最初から＝トップ画面に戻る。
+  clearProgress();
+  manual9Selected=[]; ranking=[]; allSelected=new Set(); finalStats=new Map();
+  selectedTitleMode="好き顔";
+  selectedTitle="好き顔選抜";
+  document.querySelectorAll("#titleOptions .choice-button").forEach(b=>b.classList.toggle("active",b.dataset.title==="好き顔"));
+  const topCustom=document.querySelector("#customTitle");
+  if(topCustom){ topCustom.value=""; topCustom.classList.remove("show"); }
+  document.querySelector("#topError")?.replaceChildren();
+  document.querySelectorAll("#gameOptions input[type=checkbox]").forEach(cb=>cb.checked=true);
+  setMode("simple");
+  document.querySelectorAll("#manual9TitleOptions .choice-button").forEach(b=>b.classList.toggle("active",b.dataset.title==="好き顔"));
+  const manualCustom=document.querySelector("#manual9CustomTitle");
+  if(manualCustom){ manualCustom.value=""; manualCustom.classList.remove("show"); }
+  document.querySelector("#manual9TitleError")?.replaceChildren();
+  document.querySelector("#manual9Result")?.classList.add("hidden");
+  document.querySelector("#manual9ResultActions")?.classList.add("hidden");
+  document.querySelector("#manual9PreActions")?.classList.remove("hidden");
+  document.querySelector("#manual9PreTopAction")?.classList.remove("hidden");
+  currentStage="top";
+  showOnlyStage("#top");
+  window.scrollTo({top:0,behavior:"smooth"});
 };
 document.querySelector("#customTitle").addEventListener("input",()=>{document.querySelector("#topError").textContent="";});
 document.querySelector("#prev1").onclick=()=>{if(page1>0){page1--;currentStage="round1";renderPage(1);saveProgress()}};
