@@ -1020,10 +1020,9 @@ function resolveManual9Title(){
 
 function startManual9(){
   if(!resolveManual9Title()) return;
-  const selectedGames=new Set(getSelectedGames());
-  if(!selectedGames.size){error.textContent="ゲームを1つ以上選択してください。";return;}
+  // 自分で選んで作成は、トップ画面のゲーム選択とは独立して全ゲームを対象にする。
   clearProgress();
-  chars.splice(0,chars.length,...allChars.filter(c=>selectedGames.has(c.game)));
+  chars.splice(0,chars.length,...allChars);
   if(!chars.length){error.textContent="対象キャラがいません。";return;}
   manual9Selected=[];
   allSelected=new Set();
@@ -1048,8 +1047,9 @@ function renderManual9(){
   const openGames=new Set([...root.querySelectorAll("details.manual9-game-details[open]")].map(d=>d.dataset.game));
   const selectedSet=new Set(manual9Selected);
   const selectedMap=new Map(manual9Selected.map((id,i)=>[String(id),i+1]));
-  const selectedGames=getSelectedGames();
-  root.innerHTML=selectedGames.map(game=>{
+  // 自分で選んで作成ではトップ画面のチェック状態を参照せず、常に全ゲームを表示する。
+  const manualGames=gameNames;
+  root.innerHTML=manualGames.map(game=>{
     const gameChars=allChars.filter(c=>c.game===game);
     const cards=gameChars.map(c=>{
       const rank=selectedMap.get(String(c.id));
