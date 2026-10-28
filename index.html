@@ -50,8 +50,8 @@ h2{margin-top:28px;font-size:20px}
 /* ===== 自分で9選 ===== */
 .manual9-head{text-align:center;padding:4px 0 16px}.manual9-head h2{margin:0 0 7px;font-size:24px}.manual9-head p{margin:0;color:#666;font-size:13px;line-height:1.6}.manual9-summary{position:sticky;top:8px;z-index:5;background:rgba(255,255,255,.96);border:1px solid #e5e5e8;border-radius:14px;padding:10px 12px;margin:0 auto 14px;max-width:760px;box-shadow:0 3px 12px rgba(0,0,0,.06)}.manual9-count{text-align:center;font-weight:900;font-size:15px}.manual9-selected{margin-top:8px;min-height:10px}.manual9-rank-row{display:grid;grid-template-columns:58px minmax(0,1fr) 32px;align-items:center;gap:8px;padding:5px 0;border-top:1px solid #eee}.manual9-rank-row:first-child{border-top:0}.manual9-rank-move{display:flex;gap:3px}.manual9-rank-move button{width:27px;height:27px;padding:0;border:1px solid #d6d6d8;border-radius:7px;background:#fff;font-weight:900;line-height:1;cursor:pointer}.manual9-rank-move button:disabled{opacity:.3;cursor:default}.manual9-rank-name{font-size:13px;font-weight:800;line-height:1.35}.manual9-remove{width:30px;height:30px;padding:0;border:1px solid #d6d6d8;border-radius:50%;background:#fff;font-weight:900;font-size:17px;line-height:1;cursor:pointer}.manual9-remove:hover{background:#f2f2f2}.manual9-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:12px auto 18px;max-width:760px}.manual9-actions button{min-width:190px}.manual9-game-details{margin:10px auto;max-width:760px;border:1px solid #e3e3e6;border-radius:12px;background:#fff;overflow:hidden}.manual9-game-details summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800;background:#f7f7f8}.manual9-game-details summary::-webkit-details-marker{display:none}.manual9-game-details summary::after{content:'＋';float:right;font-weight:900}.manual9-game-details[open] summary::after{content:'−'}.manual9-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;padding:12px}.manual9-card{position:relative;border:3px solid transparent;border-radius:14px;padding:5px;background:#fff;cursor:pointer;min-width:0}.manual9-card:hover{border-color:#bbb}.manual9-card.selected{border-color:#222;transform:translateY(-2px)}.manual9-card.disabled{opacity:.45;cursor:not-allowed}.manual9-card .manual9-img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#f0f0f2;border-radius:10px;display:block}.manual9-card .manual9-name{font-size:11px;font-weight:800;text-align:center;line-height:1.35;margin-top:5px;min-height:30px;display:flex;align-items:flex-start;justify-content:center}.manual9-result{max-width:760px;margin:10px auto 0}.manual9-result 
 /* ===== 相関図作成 ===== */
-.relation-top-section{margin-top:22px}.relation-setup-head{text-align:center;padding:4px 0 12px}.relation-selected{max-width:760px;margin:0 auto 14px;padding:10px;border:1px solid #e5e5e8;border-radius:12px;background:#fff}.relation-selected-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #eee;font-size:13px}.relation-selected-row:last-child{border-bottom:0}.relation-selected-row .relation-remove{margin-left:auto;width:28px;height:28px;padding:0;border-radius:50%;background:#f0f0f2}.relation-board{position:relative;max-width:760px;margin:12px auto;min-height:420px;border:1px solid #e5e5e8;border-radius:18px;background:#fafafa;overflow:hidden}.relation-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.relation-node{position:absolute;transform:translate(-50%,-50%);width:104px;min-height:110px;padding:5px;border:2px solid #ddd;border-radius:13px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;z-index:2;cursor:pointer;box-shadow:0 2px 8px #0000000b}.relation-node img,.relation-node .face-image-wrap{width:72px;height:72px;object-fit:contain;border-radius:9px;overflow:hidden}.relation-node .face-image-wrap img{width:100%;height:100%;object-fit:contain}.relation-node .relation-node-name{font-size:11px;line-height:1.25;font-weight:800;text-align:center;overflow-wrap:anywhere}.relation-node.center-node{border-color:#e88942;background:#fff8f1}.relation-node.relation-active{border-color:#2477d4;box-shadow:0 0 0 3px #2477d433}.relation-help{text-align:center;color:#666;font-size:13px;line-height:1.6;margin:10px 0}.relation-edge-label{font-size:13px;font-weight:800;fill:#333;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}.relation-config{max-width:620px;margin:14px auto;padding:14px;border:1px solid #e3e3e6;border-radius:14px;background:#fff}.relation-config label{display:block;font-size:13px;font-weight:800;margin:10px 0 5px}.relation-config select,.relation-config input{width:100%;padding:10px;border:1px solid #ccc;border-radius:9px;font:inherit;background:#fff}.relation-config-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}.relation-config-actions button{min-width:130px}.relation-list{max-width:620px;margin:12px auto}.relation-list-item{display:flex;align-items:center;gap:8px;border-bottom:1px solid #eee;padding:8px 0;font-size:13px}.relation-list-item button{margin-left:auto;padding:6px 12px;font-size:12px}.relation-result-title{text-align:center;margin:8px 0}
-@media(max-width:650px){.relation-board{min-height:490px}.relation-node{width:82px;min-height:90px;padding:4px}.relation-node img,.relation-node .face-image-wrap{width:56px;height:56px}.relation-node .relation-node-name{font-size:10px}.relation-config-actions button{width:100%}}
+.relation-top-section{margin-top:22px}.relation-setup-head{text-align:center;padding:4px 0 12px}.relation-selected{max-width:760px;margin:0 auto 14px;padding:10px;border:1px solid #e5e5e8;border-radius:12px;background:#fff}.relation-selected-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #eee;font-size:13px}.relation-selected-row:last-child{border-bottom:0}.relation-selected-row .relation-remove{margin-left:auto;width:28px;height:28px;padding:0;border-radius:50%;background:#f0f0f2}.relation-board{position:relative;max-width:760px;margin:12px auto;min-height:420px;border:1px solid #e5e5e8;border-radius:18px;background:#fafafa;overflow:hidden}.relation-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}.relation-node{position:absolute;transform:translate(-50%,-50%);width:104px;min-height:110px;padding:5px;border:2px solid #ddd;border-radius:13px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;z-index:2;cursor:pointer;box-shadow:0 2px 8px #0000000b}.relation-node img,.relation-node .face-image-wrap{width:72px;height:72px;object-fit:contain;border-radius:9px;overflow:hidden}.relation-node .face-image-wrap img{width:100%;height:100%;object-fit:contain}.relation-node .relation-node-name{font-size:11px;line-height:1.25;font-weight:800;text-align:center;overflow-wrap:anywhere}.relation-node.center-node{border-color:#e88942;background:#fff8f1}.relation-node.relation-active{border-color:#2477d4;box-shadow:0 0 0 3px #2477d433}.relation-help{text-align:center;color:#666;font-size:13px;line-height:1.6;margin:10px 0}.relation-edge-label{font-size:13px;font-weight:800;fill:#333;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}.relation-config{max-width:620px;margin:14px auto;padding:14px;border:1px solid #e3e3e6;border-radius:14px;background:#fff}.relation-config label{display:block;font-size:13px;font-weight:800;margin:10px 0 5px}.relation-config select,.relation-config input{width:100%;padding:10px;border:1px solid #ccc;border-radius:9px;font:inherit;background:#fff}.relation-config-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}.relation-config-actions button{min-width:130px}.relation-list{max-width:620px;margin:12px auto}.relation-list-item{display:flex;align-items:center;gap:8px;border-bottom:1px solid #eee;padding:8px 0;font-size:13px}.relation-list-item button{padding:6px 12px;font-size:12px;flex:0 0 auto}.relation-list-item .relation-list-text{min-width:0;overflow-wrap:anywhere;flex:1}.relation-config-direction{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.relation-direction-row{border:1px solid #e5e5e8;border-radius:10px;padding:10px;min-width:0}.relation-direction-row .relation-direction-check{display:flex;align-items:center;gap:8px;font-weight:800;margin:0 0 7px}.relation-direction-row input[type=checkbox]{width:20px;height:20px;flex:0 0 auto}.relation-direction-row input[type=text]{margin-top:2px}.relation-board{width:100%;height:clamp(420px,68vw,560px);min-height:0}.relation-svg{display:block}.relation-node{touch-action:manipulation}.relation-result-title{text-align:center;margin:8px 0}
+@media(max-width:650px){.relation-board{height:490px;min-height:490px}.relation-node{width:76px;min-height:84px;padding:3px;gap:3px}.relation-node img,.relation-node .face-image-wrap{width:50px;height:50px}.relation-node .relation-node-name{font-size:10px}.relation-config{padding:10px}.relation-config-actions button{width:100%;min-width:0}.relation-list-item{align-items:flex-start;flex-wrap:wrap}.relation-list-item .relation-list-text{flex-basis:100%}.relation-list-item button{margin-left:0}.relation-edge-label{font-size:17px}}
 
 .result-head{text-align:center;padding:8px 0 20px}.manual9-result .result-head .eyebrow{font-size:12px;letter-spacing:.12em;color:#888;font-weight:800}.manual9-result .result-head h2{font-size:30px;margin:7px 0 4px}.manual9-result .top9-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.manual9-result .top9-card{background:#fff;border-radius:15px;padding:8px;box-shadow:0 2px 10px rgba(0,0,0,.05);position:relative}.manual9-result .top9-card .name{font-size:13px;font-weight:800;text-align:center;margin-top:6px}.manual9-result .top9-card .game{font-size:10px;color:#777;text-align:center;margin-top:2px}.manual9-result .ranking-title{text-align:center;margin:30px 0 12px}.manual9-result .ranking-names{max-width:560px;margin:0 auto;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.05)}.manual9-result .ranking-name{display:flex;align-items:center;gap:14px;padding:10px 14px;border-bottom:1px solid #eee;font-size:15px;font-weight:700}.manual9-result .ranking-name:last-child{border-bottom:0}.manual9-result .ranking-number{width:42px;flex:0 0 42px;text-align:right;color:#777;font-size:13px}.manual9-result-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:22px auto 4px}.manual9-result-actions button{min-width:170px}@media(max-width:650px){.manual9-result .top9-grid{gap:8px}.manual9-result-actions button{width:100%;min-width:0}}@media(max-width:650px){.manual9-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.manual9-card{border-width:2px;padding:4px}.manual9-card .manual9-name{font-size:10px}.manual9-summary{top:4px}.manual9-actions button{min-width:0;width:100%}.manual9-rank-row{grid-template-columns:58px minmax(0,1fr) 32px}.manual9-rank-name{font-size:12px}.manual9-game-details summary{padding:11px 12px}}
 
@@ -455,10 +455,16 @@ button {
   <div id="relationBoard" class="relation-board"></div>
   <div id="relationConfig" class="relation-config hidden">
     <div id="relationPairLabel" style="font-weight:800;text-align:center"></div>
-    <label for="relationDirection">矢印の向き</label>
-    <select id="relationDirection"><option value="ab">選択した1人目 → 2人目</option><option value="ba">選択した2人目 → 1人目</option><option value="both">双方向</option><option value="none">矢印なし（関係を削除）</option></select>
-    <label for="relationLabel">関係性（任意）</label>
-    <input id="relationLabel" maxlength="30" placeholder="例：親友、片思い、ライバル">
+    <div class="relation-config-direction">
+      <div class="relation-direction-row">
+        <label class="relation-direction-check"><input type="checkbox" id="relationABEnabled"> <span id="relationABText">A → B</span></label>
+        <input id="relationABLabel" type="text" maxlength="30" placeholder="関係性（任意）：例 親友、片思い">
+      </div>
+      <div class="relation-direction-row">
+        <label class="relation-direction-check"><input type="checkbox" id="relationBAEnabled"> <span id="relationBAText">B → A</span></label>
+        <input id="relationBALabel" type="text" maxlength="30" placeholder="関係性（任意）：例 親友、片思い">
+      </div>
+    </div>
     <div class="relation-config-actions"><button type="button" class="primary" id="relationSave">設定する</button><button type="button" class="secondary" id="relationCancel">キャンセル</button></div>
   </div>
   <div class="relation-list" id="relationList"></div>
@@ -1004,20 +1010,29 @@ function renderRelationSelected(){
   document.querySelector("#relationCreate").disabled=relationSelected.length<1;
 }
 function relationPairKey(a,b){return [String(a),String(b)].sort().join("::");}
+function relationDirectedKey(a,b){return String(a)+"=>"+String(b);}
 function relationNodePositions(){
-  const n=relationSelected.length, pos=[]; if(!n)return pos;
+  const n=relationSelected.length,pos=[];if(!n)return pos;
   pos.push({x:50,y:50});
-  const outer=n-1; for(let i=0;i<outer;i++){const angle=(-90+i*360/Math.max(outer,1))*Math.PI/180;pos.push({x:50+35*Math.cos(angle),y:50+34*Math.sin(angle)});} return pos;
+  const outer=n-1;for(let i=0;i<outer;i++){const angle=(-90+i*360/Math.max(outer,1))*Math.PI/180;pos.push({x:50+35*Math.cos(angle),y:50+34*Math.sin(angle)});}return pos;
 }
 function renderRelationEditor(){
   const board=document.querySelector("#relationBoard");if(!board)return;
   const charsSelected=relationSelected.map(id=>allChars.find(c=>String(c.id)===String(id))).filter(Boolean);
   const pos=relationNodePositions();
-  let svg=`<svg class="relation-svg" viewBox="0 0 1000 700" preserveAspectRatio="none"><defs><marker id="relationArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#e88942"/></marker></defs>`;
-  for(const edge of relationEdges){const ia=relationSelected.findIndex(x=>String(x)===String(edge.a)),ib=relationSelected.findIndex(x=>String(x)===String(edge.b));if(ia<0||ib<0)continue;const a=pos[ia],b=pos[ib];const x1=a.x*10,y1=a.y*7,x2=b.x*10,y2=b.y*7;const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1;const ux=dx/len,uy=dy/len;const x1c=x1+ux*58,y1c=y1+uy*45,x2c=x2-ux*58,y2c=y2-uy*45;
-    if(edge.direction==="ab"||edge.direction==="both")svg+=`<line x1="${x1c}" y1="${y1c}" x2="${x2c}" y2="${y2c}" stroke="#e88942" stroke-width="3" marker-end="url(#relationArrow)"/>`;
-    if(edge.direction==="ba"||edge.direction==="both")svg+=`<line x1="${x2c}" y1="${y2c}" x2="${x1c}" y2="${y1c}" stroke="#e88942" stroke-width="3" marker-end="url(#relationArrow)"/>`;
-    if(edge.label)svg+=`<text class="relation-edge-label" x="${(x1+x2)/2}" y="${(y1+y2)/2-8}" text-anchor="middle">${esc(edge.label)}</text>`;
+  let svg=`<svg class="relation-svg" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true"><defs><marker id="relationArrow" markerWidth="16" markerHeight="16" refX="13" refY="8" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L14,8 L1,15 z" fill="#d66b19" stroke="#b9570d" stroke-width="1"/></marker></defs>`;
+  const pairCounts={};for(const e of relationEdges){const k=relationPairKey(e.a,e.b);pairCounts[k]=(pairCounts[k]||0)+1;}
+  for(const edge of relationEdges){
+    const ia=relationSelected.findIndex(x=>String(x)===String(edge.a)),ib=relationSelected.findIndex(x=>String(x)===String(edge.b));if(ia<0||ib<0)continue;
+    const a=pos[ia],b=pos[ib];const x1=a.x*10,y1=a.y*7,x2=b.x*10,y2=b.y*7;const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1;const ux=dx/len,uy=dy/len;
+    const startX=x1+ux*65,startY=y1+uy*52,endX=x2-ux*65,endY=y2-uy*52;
+    const hasReverse=relationEdges.some(e=>String(e.a)===String(edge.b)&&String(e.b)===String(edge.a));
+    const offset=hasReverse?12:0;
+    const px=-uy*offset,py=ux*offset;
+    const sx=startX+px,sy=startY+py,ex=endX+px,ey=endY+py;
+    if(hasReverse){const mx=(sx+ex)/2,my=(sy+ey)/2;const qx=mx+px*0.7,qy=my+py*0.7;svg+=`<path d="M ${sx} ${sy} Q ${qx} ${qy} ${ex} ${ey}" fill="none" stroke="#d66b19" stroke-width="4" stroke-linecap="round" marker-end="url(#relationArrow)"/>`;}
+    else svg+=`<line x1="${sx}" y1="${sy}" x2="${ex}" y2="${ey}" stroke="#d66b19" stroke-width="4" stroke-linecap="round" marker-end="url(#relationArrow)"/>`;
+    if(edge.label){const tx=(sx+ex)/2+px*0.7,ty=(sy+ey)/2+py*0.7-7;svg+=`<text class="relation-edge-label" x="${tx}" y="${ty}" text-anchor="middle">${esc(edge.label)}</text>`;}
   }
   svg+='</svg>';
   const nodes=charsSelected.map((c,i)=>{const p=pos[i],active=String(relationActiveNode)===String(c.id);return `<button type="button" class="relation-node${i===0?" center-node":""}${active?" relation-active":""}" data-relation-node="${esc(c.id)}" style="left:${p.x}%;top:${p.y}%" aria-label="${esc(c.name)}">${img(c)}<span class="relation-node-name">${esc(c.name)}</span></button>`;}).join("");
@@ -1033,27 +1048,33 @@ function renderRelationEditor(){
 function openRelationConfig(){
   const pair=relationPendingPair;if(!pair)return;
   const a=allChars.find(c=>String(c.id)===pair.a),b=allChars.find(c=>String(c.id)===pair.b);if(!a||!b)return;
-  const existing=relationEdges.find(e=>relationPairKey(e.a,e.b)===relationPairKey(pair.a,pair.b));
-  const direction=existing?(String(existing.a)===pair.a?existing.direction:(existing.direction==="ab"?"ba":existing.direction==="ba"?"ab":existing.direction)):"ab";
-  document.querySelector("#relationPairLabel").textContent=`${a.name} × ${b.name}`;
-  document.querySelector("#relationDirection").innerHTML=`<option value="ab">${esc(a.name)} → ${esc(b.name)}</option><option value="ba">${esc(b.name)} → ${esc(a.name)}</option><option value="both">双方向</option><option value="none">矢印なし（関係を削除）</option>`;
-  document.querySelector("#relationDirection").value=direction;
-  document.querySelector("#relationLabel").value=existing?.label||"";
+  const ab=relationEdges.find(e=>String(e.a)===pair.a&&String(e.b)===pair.b);
+  const ba=relationEdges.find(e=>String(e.a)===pair.b&&String(e.b)===pair.a);
+  document.querySelector("#relationPairLabel").textContent=`${a.name} ⇄ ${b.name}`;
+  document.querySelector("#relationABText").textContent=`${a.name} → ${b.name}`;
+  document.querySelector("#relationBAText").textContent=`${b.name} → ${a.name}`;
+  document.querySelector("#relationABEnabled").checked=!!ab;
+  document.querySelector("#relationBAEnabled").checked=!!ba;
+  document.querySelector("#relationABLabel").value=ab?.label||"";
+  document.querySelector("#relationBALabel").value=ba?.label||"";
   document.querySelector("#relationConfig").classList.remove("hidden");
-  document.querySelector("#relationEditorHelp").textContent="矢印の向きと関係性を設定してください。";
+  document.querySelector("#relationEditorHelp").textContent="矢印ごとに独立して設定できます。両方にチェックすると双方向になります。";
   renderRelationEditor();
 }
 function saveRelationConfig(){
-  if(!relationPendingPair)return;const {a,b}=relationPendingPair;const direction=document.querySelector("#relationDirection").value;const label=document.querySelector("#relationLabel").value.trim();
-  relationEdges=relationEdges.filter(e=>relationPairKey(e.a,e.b)!==relationPairKey(a,b));
-  if(direction!=="none")relationEdges.push({a,b,direction,label});
+  if(!relationPendingPair)return;const {a,b}=relationPendingPair;
+  const abEnabled=document.querySelector("#relationABEnabled").checked,baEnabled=document.querySelector("#relationBAEnabled").checked;
+  const abLabel=document.querySelector("#relationABLabel").value.trim(),baLabel=document.querySelector("#relationBALabel").value.trim();
+  relationEdges=relationEdges.filter(e=>!((String(e.a)===a&&String(e.b)===b)||(String(e.a)===b&&String(e.b)===a)));
+  if(abEnabled)relationEdges.push({a,b,label:abLabel});
+  if(baEnabled)relationEdges.push({a:b,b:a,label:baLabel});
   relationPendingPair=null;document.querySelector("#relationConfig").classList.add("hidden");document.querySelector("#relationEditorHelp").textContent="キャラクターを2人タップして関係を設定します。";renderRelationEditor();
 }
 function renderRelationList(){
   const box=document.querySelector("#relationList");if(!box)return;
-  box.innerHTML=relationEdges.map(e=>{const a=allChars.find(c=>String(c.id)===String(e.a)),b=allChars.find(c=>String(c.id)===String(e.b));if(!a||!b)return"";const arrow=e.direction==="both"?"↔":e.direction==="ba"?"←":"→";return `<div class="relation-list-item"><span>${esc(a.name)} ${arrow} ${esc(b.name)}${e.label?`：${esc(e.label)}`:""}</span><button type="button" class="secondary" data-relation-edit="${esc(e.a)}::${esc(e.b)}">編集</button><button type="button" class="secondary" data-relation-delete="${esc(e.a)}::${esc(e.b)}">削除</button></div>`;}).join("");
+  box.innerHTML=relationEdges.map(e=>{const a=allChars.find(c=>String(c.id)===String(e.a)),b=allChars.find(c=>String(c.id)===String(e.b));if(!a||!b)return"";return `<div class="relation-list-item"><span class="relation-list-text">${esc(a.name)} → ${esc(b.name)}${e.label?`：${esc(e.label)}`:""}</span><button type="button" class="secondary" data-relation-edit="${esc(e.a)}::${esc(e.b)}">編集</button><button type="button" class="secondary" data-relation-delete="${esc(e.a)}::${esc(e.b)}">削除</button></div>`;}).join("");
   box.querySelectorAll("[data-relation-edit]").forEach(b=>b.onclick=()=>{const [a,id]=b.dataset.relationEdit.split("::");relationPendingPair={a,b:id};openRelationConfig();});
-  box.querySelectorAll("[data-relation-delete]").forEach(b=>b.onclick=()=>{const [a,id]=b.dataset.relationDelete.split("::");relationEdges=relationEdges.filter(e=>relationPairKey(e.a,e.b)!==relationPairKey(a,id));renderRelationEditor();});
+  box.querySelectorAll("[data-relation-delete]").forEach(b=>b.onclick=()=>{const [a,id]=b.dataset.relationDelete.split("::");relationEdges=relationEdges.filter(e=>!(String(e.a)===a&&String(e.b)===id));renderRelationEditor();});
 }
 function createRelationMap(){if(!relationSelected.length)return;relationEdges=[];relationActiveNode=null;relationPendingPair=null;currentStage="relationEditor";showOnlyStage("#relationEditor");document.querySelector("#relationConfig").classList.add("hidden");renderRelationEditor();window.scrollTo({top:0,behavior:"smooth"});}
 
